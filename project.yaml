@@ -1,7 +1,7 @@
 specVersion: 0.2.0
-name: subql_behavioral_incentives
+name: subql_bifrost_for_vfil
 version: 1.0.0
-description: For Bifrost behavioral incentives project
+description: For Bifrost vFil project
 repository: https://github.com/subquery/bifrost-subql-starter
 schema:
   file: ./schema.graphql
@@ -13,35 +13,11 @@ network:
     file: ./dist/chaintypes.js
 dataSources:
   - kind: substrate/Runtime
-    startBlock: 1500000
+    startBlock: 2723000
     mapping:
       file: ./dist/index.js
       handlers:
-        # Update current block
-        - handler: handleBlock
-          kind: substrate/BlockHandler
-        # ParachainStaking module handlers
-        - handler: handleParachainStakingDelegation
-          kind: substrate/EventHandler
-          filter:
-            module: parachainStaking
-            method: Delegation
-        - handler: handleParachainStakingDelegationIncreased
-          kind: substrate/EventHandler
-          filter:
-            module: parachainStaking
-            method: DelegationIncreased
-        - handler: handleParachainStakingDelegationDecreased
-          kind: substrate/EventHandler
-          filter:
-            module: parachainStaking
-            method: DelegationDecreased
-        - handler: handleParachainStakingDelegationRevoked
-          kind: substrate/EventHandler
-          filter:
-            module: parachainStaking
-            method: DelegationRevoked
-      #VtokenMinting module handlers
+      # VtokenMinting module handlers
         - handler: handleVtokenMintingMinted
           kind: substrate/EventHandler
           filter:
@@ -52,50 +28,25 @@ dataSources:
           filter:
             module: vtokenMinting
             method: Redeemed
-      #Currencies module handlers
-        - handler: handleVtokenTransferOut
+      # SLP module handlers
+        - handler: handleSlpRefund
           kind: substrate/EventHandler
           filter:
-            module: tokens
-            method: Transfer
-      # VstokenConversion module handlers
-        - handler: handleVstokenConversionVsbondConvertToVsksm
+            module: slp
+            method: Refund
+        - handler: handleSlpTransferTo
           kind: substrate/EventHandler
           filter:
-            module: vstokenConversion
-            method: VsbondConvertToVsksm
-        - handler: handleVstokenConversionVsksmConvertToVsbond
+            module: slp
+            method: TransferTo
+      # CrossInOut module handlers
+        - handler: handleCrossInOutCrossedIn
           kind: substrate/EventHandler
           filter:
-            module: vstokenConversion
-            method: VsksmConvertToVsbond
-      # Salp and Salp-lite modules handlers
-        - handler: handleSalpContributed
+            module: crossInOut
+            method: CrossedIn
+        - handler: handleCrossInOutCrossedOut
           kind: substrate/EventHandler
           filter:
-            module: salp
-            method: Contributed
-        - handler: handleSalpLiteIssued
-          kind: substrate/EventHandler
-          filter:
-            module: salpLite
-            method: Issued
-      # ZenlinkProtocol module handlers
-        - handler: handleZenlinkProtocolLiquidityAdded
-          kind: substrate/EventHandler
-          filter:
-            module: zenlinkProtocol
-            method: LiquidityAdded
-        - handler: handleZenlinkProtocolLiquidityRemoved
-          kind: substrate/EventHandler
-          filter:
-            module: zenlinkProtocol
-            method: LiquidityRemoved
-      # Buy KSM bond. Identified by Utility Batch call.
-        - handler: handleSystemRemarkWithEvent
-          kind: substrate/CallHandler
-          filter:
-            module: utility
-            method: batchAll
-            success: true
-
+            module: crossInOut
+            method: CrossedOut

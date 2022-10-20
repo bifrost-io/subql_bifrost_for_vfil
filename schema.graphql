@@ -1,100 +1,103 @@
-type Account @entity {
+##############################################
+################  SLP Module #################
+##############################################
 
-  id: ID! #AccountId
-}
-
-
-type Add @entity {
+type BifrostTransferToMiner @entity {
 
   id: ID! #id is a required field
-
-  account: Account! #Foreign key to Account Entity
-
-  event: String! #Event name
-
-  token: String! #Token symbol
-
-  amount: BigInt! #Amount of BNC voted
 
   blockHeight: Int! #Block height of the event
 
-  timestamp: Date!  #Timestamp of the event
+  currencyId: String!
 
-  exchangeRate: Float!  #Token/Vtoken exchange rate ot the block height
+  fromLocation: String!
 
-  base: Float! # amount / precision * exchangeRate
+  toLocation: String!
 
-}
+  amount: String!
 
+  timestamp: Int!
 
-type Subtract @entity {
-
-  id: ID! #id is a required field
-
-  account: Account! #Foreign key to Account Entity
-
-  event: String! #Event name
-
-  token: String! #Token symbol
-
-  amount: BigInt! #Amount of BNC voted
-
-  blockHeight: Int! #Block height of the event
-
-  timestamp: Date!  #Timestamp of the event
-
-  exchangeRate: Float!  #Token/Vtoken exchange rate ot the block height
-
-  base: Float! # amount / precision * exchangeRate
-
-}
-
-
-type ParachainStaking @entity {
-
-  id: ID! #id is a required field
-
-  account: Account! #Foreign key to Account Entity
-
-  event: String! #Event name
-
-  token: String! #Token symbol
-
-  amount: BigInt! #Amount of BNC voted
-
-  blockHeight: Int! #Block height of the Voted event
-
-  timestamp: Date!  #Timestamp of the Voted event
+  filecoinMultisigTxId: Int
+  
 }
 
 
 ##############################################
-# Support calculation tables #
+########  VtokenMinting Module     ###########
 ##############################################
 
-type PersonalTotalAccumultated @entity {
-
-  id: ID!
-
-  accumulated: Float!  #Accumulated staking amount at the block(divided by token precision)
-}
-
-
-type StakingAccumulated @entity {
+type BifrostMint @entity {
 
   id: ID! #id is a required field
 
-  account: Account! #Foreign key to Account Entity
+  event: String!
 
-  changeBlock: Int! #At which block the staking balance changed
+  currencyId: String!
 
-  accumulated: Float!  #Accumulated staking amount at the block(divided by token precision)
+  amount: String!
+
+  blockHeight: Int!
+
+  timestamp: Int!
 }
 
-
-type CurrentBlock @entity {
+# 包括VtokenMinting模块的Redeem和SLP模块的Refund都放在这里边
+type BifrostRedeem @entity {
 
   id: ID! #id is a required field
 
-  current: Int! #Current Block Number
+  event: String!
+
+  currencyId: String!
+
+  amount: String!
+
+  blockHeight: Int!
+
+  timestamp: Int!
+}
+
+
+##############################################
+##########  CrossInOut Module     ############
+##############################################
+
+type BifrostCrossedIn @entity {
+
+  id: ID! #id is a required field
+
+  blockHeight: Int!
+
+  accountId: String!
+
+  currencyId: String!
+
+  amount: String!
+
+  location: String!
+
+  # for filecoin, it is the transfer transaction cid.
+  remark:  String
+
+  timestamp: Int!
+}
+
+type BifrostCrossedOut @entity {
+
+  id: ID! #id is a required field
+
+  blockHeight: Int!
+
+  accountId: String!
+
+  currencyId: String!
+
+  amount: String!
+
+  location: String!
+
+  filecoinMultisigTxId: Int
+
+  timestamp: Int!
 }
