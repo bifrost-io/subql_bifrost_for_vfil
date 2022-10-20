@@ -1,0 +1,100 @@
+type Account @entity {
+
+  id: ID! #AccountId
+}
+
+
+type Add @entity {
+
+  id: ID! #id is a required field
+
+  account: Account! #Foreign key to Account Entity
+
+  event: String! #Event name
+
+  token: String! #Token symbol
+
+  amount: BigInt! #Amount of BNC voted
+
+  blockHeight: Int! #Block height of the event
+
+  timestamp: Date!  #Timestamp of the event
+
+  exchangeRate: Float!  #Token/Vtoken exchange rate ot the block height
+
+  base: Float! # amount / precision * exchangeRate
+
+}
+
+
+type Subtract @entity {
+
+  id: ID! #id is a required field
+
+  account: Account! #Foreign key to Account Entity
+
+  event: String! #Event name
+
+  token: String! #Token symbol
+
+  amount: BigInt! #Amount of BNC voted
+
+  blockHeight: Int! #Block height of the event
+
+  timestamp: Date!  #Timestamp of the event
+
+  exchangeRate: Float!  #Token/Vtoken exchange rate ot the block height
+
+  base: Float! # amount / precision * exchangeRate
+
+}
+
+
+type ParachainStaking @entity {
+
+  id: ID! #id is a required field
+
+  account: Account! #Foreign key to Account Entity
+
+  event: String! #Event name
+
+  token: String! #Token symbol
+
+  amount: BigInt! #Amount of BNC voted
+
+  blockHeight: Int! #Block height of the Voted event
+
+  timestamp: Date!  #Timestamp of the Voted event
+}
+
+
+##############################################
+# Support calculation tables #
+##############################################
+
+type PersonalTotalAccumultated @entity {
+
+  id: ID!
+
+  accumulated: Float!  #Accumulated staking amount at the block(divided by token precision)
+}
+
+
+type StakingAccumulated @entity {
+
+  id: ID! #id is a required field
+
+  account: Account! #Foreign key to Account Entity
+
+  changeBlock: Int! #At which block the staking balance changed
+
+  accumulated: Float!  #Accumulated staking amount at the block(divided by token precision)
+}
+
+
+type CurrentBlock @entity {
+
+  id: ID! #id is a required field
+
+  current: Int! #Current Block Number
+}
