@@ -6,19 +6,19 @@ type BifrostTransferToMiner @entity {
 
   id: ID! #id is a required field
 
-  blockHeight: Int! #Block height of the event
+  block_height: Int! #Block height of the event
 
-  currencyId: String!
+  currency_id: String!
 
-  fromLocation: String!
+  from_location: String!
 
-  toLocation: String!
+  to_location: String!
 
   amount: String!
 
   timestamp: Int!
 
-  filecoinMultisigTxId: Int
+  filecoin_multisig_tx_id: Int
   
 }
 
@@ -33,11 +33,11 @@ type BifrostMint @entity {
 
   event: String!
 
-  currencyId: String!
+  currency_id: String!
 
   amount: String!
 
-  blockHeight: Int!
+  block_height: Int!
 
   timestamp: Int!
 }
@@ -49,11 +49,11 @@ type BifrostRedeem @entity {
 
   event: String!
 
-  currencyId: String!
+  currency_id: String!
 
   amount: String!
 
-  blockHeight: Int!
+  block_height: Int!
 
   timestamp: Int!
 }
@@ -67,11 +67,11 @@ type BifrostCrossedIn @entity {
 
   id: ID! #id is a required field
 
-  blockHeight: Int!
+  block_height: Int!
 
-  accountId: String!
+  account_id: String!
 
-  currencyId: String!
+  currency_id: String!
 
   amount: String!
 
@@ -87,17 +87,17 @@ type BifrostCrossedOut @entity {
 
   id: ID! #id is a required field
 
-  blockHeight: Int!
+  block_height: Int!
 
-  accountId: String!
+  account_id: String!
 
-  currencyId: String!
+  currency_id: String!
 
   amount: String!
 
   location: String!
 
-  filecoinMultisigTxId: Int
+  filecoin_multisig_tx_id: Int
 
   timestamp: Int!
 }

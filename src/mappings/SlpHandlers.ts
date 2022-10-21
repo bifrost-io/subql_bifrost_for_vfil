@@ -23,9 +23,9 @@ export async function handleSlpRefund(event: SubstrateEvent): Promise<void> {
   if (currencyId == FIL_CURRENCY) {
     record.event = "Refund";
     // Store currencyId as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
+    record.currency_id = JSON.stringify(currencyId);
     record.amount = (tokenAmount as Balance).toString();
-    record.blockHeight = blockNumber;
+    record.block_height = blockNumber;
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
 
@@ -53,17 +53,17 @@ export async function handleSlpTransferTo(
 
   // If the minting currency is FIL
   if (currencyId == FIL_CURRENCY) {
-    record.blockHeight = blockNumber;
+    record.block_height = blockNumber;
     record.amount = (tokenAmount as Balance).toString();
 
     // Store currencyId and locations as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
-    record.fromLocation = JSON.stringify(from);
-    record.toLocation = JSON.stringify(to);
+    record.currency_id = JSON.stringify(currencyId);
+    record.from_location = JSON.stringify(from);
+    record.to_location = JSON.stringify(to);
 
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
-    record.filecoinMultisigTxId = null;
+    record.filecoin_multisig_tx_id = null;
 
     await record.save();
   }

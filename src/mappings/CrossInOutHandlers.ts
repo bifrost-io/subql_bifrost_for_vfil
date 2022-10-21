@@ -23,12 +23,12 @@ export async function handleCrossInOutCrossedIn(
 
   // If the minting currency is FIL
   if (currencyId == FIL_CURRENCY) {
-    record.blockHeight = blockNumber;
-    record.accountId = (address as AccountId).toString();
+    record.block_height = blockNumber;
+    record.account_id = (address as AccountId).toString();
     record.amount = (tokenAmount as Balance).toString();
 
     // Store currencyId as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
+    record.currency_id = JSON.stringify(currencyId);
     record.location = JSON.stringify(location);
 
     if (maybeRemark.isSome) {
@@ -64,18 +64,18 @@ export async function handleCrossInOutCrossedOut(
 
   // If the minting currency is FIL
   if (currencyId == FIL_CURRENCY) {
-    record.accountId = (address as AccountId).toString();
+    record.account_id = (address as AccountId).toString();
     record.amount = (tokenAmount as Balance).toString();
-    record.blockHeight = blockNumber;
+    record.block_height = blockNumber;
 
     // Store currencyId as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
+    record.currency_id = JSON.stringify(currencyId);
     record.location = JSON.stringify(location);
 
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
 
-    record.filecoinMultisigTxId = null;
+    record.filecoin_multisig_tx_id = null;
 
     await record.save();
   }

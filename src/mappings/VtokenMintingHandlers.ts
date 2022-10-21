@@ -25,9 +25,9 @@ export async function handleVtokenMintingMinted(
   if (currencyId == FIL_CURRENCY) {
     record.event = "Minted";
     // Store currencyId as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
+    record.currency_id = JSON.stringify(currencyId);
     record.amount = (tokenAmount as Balance).toString();
-    record.blockHeight = blockNumber;
+    record.block_height = blockNumber;
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
 
@@ -57,9 +57,9 @@ export async function handleVtokenMintingRedeemed(
   if (currencyId == FIL_CURRENCY) {
     record.event = "Redeemed";
     // Store currencyId as a JSON string.
-    record.currencyId = JSON.stringify(currencyId);
+    record.currency_id = JSON.stringify(currencyId);
     record.amount = (tokenAmount as Balance).toString();
-    record.blockHeight = blockNumber;
+    record.block_height = blockNumber;
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
 
