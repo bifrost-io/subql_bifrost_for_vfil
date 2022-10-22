@@ -7,7 +7,7 @@ import { FIL_CURRENCY } from "./constants";
 export async function handleCrossInOutCrossedIn(
   event: SubstrateEvent
 ): Promise<void> {
-  //   logger.info(`${event}`);
+  logger.info(`${event}`);
   let evt = JSON.parse(JSON.stringify(event));
   const blockNumber = event.block.block.header.number.toNumber();
   //   Create the record by constructing id from blockNumber + eventIndex
