@@ -22,7 +22,7 @@ export async function handleVtokenMintingMinted(
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.event = "Minted";
     // Store currencyId as a JSON string.
     record.currency_id = JSON.stringify(currencyId);
@@ -54,7 +54,7 @@ export async function handleVtokenMintingRedeemed(
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.event = "Redeemed";
     // Store currencyId as a JSON string.
     record.currency_id = JSON.stringify(currencyId);

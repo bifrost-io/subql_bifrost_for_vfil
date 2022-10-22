@@ -5,7 +5,7 @@ import { FIL_CURRENCY } from "./constants";
 
 // Handing talbe【SLP】, Event【Refund】
 export async function handleSlpRefund(event: SubstrateEvent): Promise<void> {
-  //   logger.info(`${event}`);
+  logger.info(`${event}`);
   let evt = JSON.parse(JSON.stringify(event));
   const blockNumber = event.block.block.header.number.toNumber();
   //   Create the record by constructing id from blockNumber + eventIndex
@@ -20,7 +20,7 @@ export async function handleSlpRefund(event: SubstrateEvent): Promise<void> {
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.event = "Refund";
     // Store currencyId as a JSON string.
     record.currency_id = JSON.stringify(currencyId);
@@ -52,7 +52,7 @@ export async function handleSlpTransferTo(
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.block_height = blockNumber;
     record.amount = (tokenAmount as Balance).toString();
 

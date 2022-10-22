@@ -22,7 +22,7 @@ export async function handleCrossInOutCrossedIn(
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.block_height = blockNumber;
     record.account_id = (address as AccountId).toString();
     record.amount = (tokenAmount as Balance).toString();
@@ -63,7 +63,7 @@ export async function handleCrossInOutCrossedOut(
   } = evt;
 
   // If the minting currency is FIL
-  if (currencyId == FIL_CURRENCY) {
+  if (JSON.stringify(currencyId) == JSON.stringify(FIL_CURRENCY)) {
     record.account_id = (address as AccountId).toString();
     record.amount = (tokenAmount as Balance).toString();
     record.block_height = blockNumber;
