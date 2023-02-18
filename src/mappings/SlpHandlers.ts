@@ -63,7 +63,7 @@ export async function handleSlpTransferTo(
 
     // Transfer Date type to Unix timestamp type.
     record.timestamp = Math.floor(event.block.timestamp.getTime() / 1000);
-    record.filecoin_multisig_tx_id = null;
+    record.filecoin_multisig_cid = null;
 
     await record.save();
   }
