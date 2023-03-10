@@ -13,14 +13,14 @@ repository: https://github.com/subquery/bifrost-subql-starter
 schema:
   file: ./schema.graphql
 network:
-  endpoint: wss://bifrost-rpc.liebi.com:443/ws
-  genesisHash: '0x9f28c6a68e0fc9646eff64935684f6eeeece527e37bbe1f213d22caa1d9d6bed'
+  endpoint: ws://172.19.64.5:9866
+  genesisHash: '0xbf5a84fa2855d9a1fba6864e5f490291f0a8eb1e74fbb9ade04acb9a04240591'
   dictionary: https://api.subquery.network/sq/subquery/bifrost-parachain-dictionary
   chaintypes:
     file: ./dist/chaintypes.js
 dataSources:
   - kind: substrate/Runtime
-    startBlock: 3420650
+    startBlock: 1
     mapping:
       file: ./dist/index.js
       handlers:

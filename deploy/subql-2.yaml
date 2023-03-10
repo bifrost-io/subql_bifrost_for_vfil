@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: vfil2-subql
+    qcloud-app: vfil2-subql
+  name: vfil2-subql
+  namespace: vfil
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: vfil2-subql
+      qcloud-app: vfil2-subql
+  template:
+    metadata:
+      labels:
+        k8s-app: vfil2-subql
+        qcloud-app: vfil2-subql
+    spec:
+      containers:
+      - args:
+        - -f=/app
+        - --local
+        - --timestamp-field
+        env:
+        - name: DB_DATABASE
+          value: vfil2
+        - name: DB_USER
+          value: postgres
+        - name: DB_PASS
+          value: *
+        - name: DB_HOST
+          value: *
+        - name: DB_PORT
+          value: '*'
+        image: harbor.liebi.com/vfil/vfil-subql:937fb87
+        imagePullPolicy: Always
+        name: vfil2-subql
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          privileged: false
+      imagePullSecrets:
+      - name: harbor
+      restartPolicy: Always
