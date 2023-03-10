@@ -1,1 +1,1 @@
-export const FIL_CURRENCY = { token2: 2 };
+export const FIL_CURRENCY = { token2: 4 };
