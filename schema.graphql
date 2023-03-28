@@ -101,3 +101,21 @@ type BifrostCrossedOut @entity {
 
   timestamp: Int!
 }
+
+type BifrostLinkedAccountRegistered @entity {
+
+  id: ID! #id is a required field
+
+  block_height: Int!
+
+  account_id: String!
+
+  currency_id: String!
+
+  location: String!
+
+  timestamp: Int!
+
+  # used to record whether the account is air-dropped 1 BNC for fee or not.
+  fee_airdrop_tx_hash: String
+}
