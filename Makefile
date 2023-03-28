@@ -24,7 +24,8 @@ update-proc: build
 	kubectl set image deploy -n ${NAMESPACE-PROC}  vfil2-subql vfil2-subql=${IMAGE}
 	kubectl set image deploy -n ${NAMESPACE-PROC}  vfil3-subql vfil3-subql=${IMAGE}
 	kubectl set image deploy -n ${NAMESPACE-PROC}  vfil4-subql vfil4-subql=${IMAGE}
-	kubectl rollout restart deploy -n ${NAMESPACE-PROC}  vfil1-subql vfil2-subql vfil3-subql vfil4-subql
+	kubectl set image deploy -n ${NAMESPACE-PROC}  vfil5-subql vfil5-subql=${IMAGE}
+	kubectl rollout restart deploy -n ${NAMESPACE-PROC}  vfil1-subql vfil2-subql vfil3-subql vfil4-subql vfil5-subql
 
 restart-proc-only:
 	kubectl rollout restart deploy -n ${NAMESPACE-PROC}  vfil1-subql vfil2-subql vfil3-subql vfil4-subql
